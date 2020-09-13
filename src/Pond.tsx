@@ -58,7 +58,7 @@ class Pond extends React.Component<any, any> {
         let sendFish = {
             colour: this.state.sendFishColour,
             eye: this.state.sendFishEye,
-            parent: this.state.fishID,
+            parent: parseInt(this.state.fishID),
             item: this.state.sendFishText,
             title: this.state.sendFishTitle
         }
@@ -116,7 +116,7 @@ class Pond extends React.Component<any, any> {
         let sendFish = {
             colour: this.state.sendFishColour,
             eye: this.state.sendFishEye,
-            parent: this.state.fishID,
+            parent: parseInt(this.state.fishID),
             item: this.state.sendFishText,
             title: this.state.sendFishTitle
         }
@@ -134,6 +134,12 @@ class Pond extends React.Component<any, any> {
 
             return(
                 <div>
+                    <FishyForm colourHandler={this.colourHandler.bind(this)} 
+                        eyeHandler={this.eyeHandler.bind(this)} 
+                        textHandler={this.textHandler.bind(this)}
+                        titleHandler={this.titleHandler.bind(this)}
+                        buttonHandler={this.release.bind(this)}/>
+
                     {fishElements}
                 </div>
             )
@@ -147,6 +153,8 @@ class Pond extends React.Component<any, any> {
                         textHandler={this.textHandler.bind(this)}
                         titleHandler={this.titleHandler.bind(this)}
                         buttonHandler={this.release.bind(this)}/>
+
+
                     {fishElements}
     
                 </div>
