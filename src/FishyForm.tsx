@@ -16,13 +16,13 @@ function FishyForm(props: any){
                 onChange={(e) => props.textHandler(e.target.value)} />
             <ColorPicker
                 name='colour'
-                defaultValue='#000'
+                defaultValue='Main colour'
                 // value={this.state.color} - for controlled component
                 onChange={colour => props.colourHandler(colour)}
             />
             <ColorPicker
                 name='eye'
-                defaultValue='#FFF'
+                defaultValue='Eye colour'
                 // value={this.state.color} - for controlled component
                 onChange={colour => props.eyeHandler(colour)}
             />

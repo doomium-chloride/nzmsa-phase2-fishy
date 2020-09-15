@@ -3,6 +3,9 @@ import axios from 'axios';
 import Fish from './Fish';
 import FishyForm from './FishyForm';
 import { useHistory } from 'react-router-dom';
+import FishyContent from './FishyContent';
+import { IconButton, Icon, SvgIcon } from '@material-ui/core';
+import up from './up.svg';
 
 // url = localhost:44311/
 
@@ -43,13 +46,15 @@ class Pond extends React.Component<any, any> {
             })
         
         if(this.state.fishID != null){
-            axios.get(serverBase + fetchFish + "/" + this.state.fishID)
+            let fishID = this.state.fishID || 0
+            axios.get(serverBase + fetchFish + "/" + fishID)
             .then(function (response) {
                 let message = response.data;
                 that.setState({
                     mainFish: message
                 })
             })
+            .catch(() => null)// do nothing
         }
     }
 
@@ -58,12 +63,16 @@ class Pond extends React.Component<any, any> {
         let sendFish = {
             colour: this.state.sendFishColour,
             eye: this.state.sendFishEye,
-            parent: parseInt(this.state.fishID),
+            parent: parseInt(this.state.fishID) || 0,
             item: this.state.sendFishText,
-            title: this.state.sendFishTitle
+            title: this.state.sendFishTitle,
+            created: new Date()
         }
 
-        axios.post(serverBase + fetchFish, sendFish);
+        axios.post(serverBase + fetchFish, sendFish)
+            .then(() => {
+                window.location.reload();
+            });
 
         console.log(sendFish)
             
@@ -128,12 +137,29 @@ class Pond extends React.Component<any, any> {
                 let fish = fishes[i];
                 if(fish.parent == mainFish.fishID){
                     fishElements.push(<Fish colour={fish.colour} eye={fish.eye} key={"fish" + i} 
-                        onClick={fishyRedirect(fish.fishID)} />);
+                    dataTip={fish.title} onClick={fishyRedirect(fish.fishID)} />);
                 }
             }
 
             return(
                 <div>
+
+                    <div className="up-button">
+                        <IconButton onClick={fishyRedirect(mainFish.parent)}>
+                            <SvgIcon viewBox="0 0 400 400" fontSize='large'>
+                                <circle cx="200" cy="200" r="200" fill="green" />
+
+
+                                <polygon points="200,50, 50,150, 350,150" fill="white"/>
+
+                                <rect x="150" y="140" width="100" height="210" fill="white" />
+                            </SvgIcon>
+                        </IconButton>
+                    </div>
+                    
+
+                    <FishyContent fish={mainFish} />
+
                     <FishyForm colourHandler={this.colourHandler.bind(this)} 
                         eyeHandler={this.eyeHandler.bind(this)} 
                         textHandler={this.textHandler.bind(this)}

@@ -21,3 +21,9 @@ code {
 .form {
     margin: 2%;
 }
+
+.up-button {
+    position: fixed;
+    left: 2%;
+    top: 2%;
+}
