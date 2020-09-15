@@ -15,18 +15,20 @@ function FishyForm(props: any){
             <TextField id="outlined-basic" label="Text" variant="outlined" multiline={true} 
                 onChange={(e) => props.textHandler(e.target.value)} />
             <ColorPicker
+                variant="outlined"
                 name='colour'
                 defaultValue='Main colour'
                 // value={this.state.color} - for controlled component
                 onChange={colour => props.colourHandler(colour)}
             />
             <ColorPicker
+                variant="outlined"
                 name='eye'
                 defaultValue='Eye colour'
                 // value={this.state.color} - for controlled component
                 onChange={colour => props.eyeHandler(colour)}
             />
-            <Button onClick={props.buttonHandler}>
+            <Button variant="contained" onClick={props.buttonHandler}>
                 Release
             </Button>
         </form>
