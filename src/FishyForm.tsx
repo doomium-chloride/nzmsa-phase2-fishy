@@ -28,7 +28,7 @@ function FishyForm(props: any){
                 // value={this.state.color} - for controlled component
                 onChange={colour => props.eyeHandler(colour)}
             />
-            <Button variant="contained" onClick={props.buttonHandler}>
+            <Button size='large' variant="contained" onClick={props.buttonHandler}>
                 Release
             </Button>
         </form>
