@@ -6,9 +6,11 @@ import { useHistory } from 'react-router-dom';
 import FishyContent from './FishyContent';
 import { IconButton, Icon, SvgIcon } from '@material-ui/core';
 import up from './up.svg';
+import SortingTable from './SortingTable';
+import {sort} from './Sorter';
 
 // url = localhost:44311/
-
+let count = 0
 const serverBase = "https://localhost:44311/";
 const fetchFish = "api/Fish";
 
@@ -30,7 +32,9 @@ class Pond extends React.Component<any, any> {
             sendFishColour: 'black',
             sendFishEye: 'white',
             sendFishTitle: "",
-            sendFishText: "" //item
+            sendFishText: "", //item
+            sortBy: 'none',
+            sortAscending: true
         }
     }
     componentDidMount(){
@@ -74,7 +78,6 @@ class Pond extends React.Component<any, any> {
                 window.location.reload();
             });
 
-        console.log(sendFish)
             
     }
 
@@ -113,24 +116,27 @@ class Pond extends React.Component<any, any> {
             sendFishTitle: text
         })
     }
+
+    sortHandler(ascending: boolean, attribute: string){
+        this.setState({
+            sortBy: attribute,
+            sortAscending: ascending
+        });
+    }
     
     render(){
 //
-        let fishes = this.state.fishes;
+        let attribute = this.state.sortBy;
+        let ascending = this.state.sortAscending;
+        let fishes = sort(this.state.fishes, attribute, ascending);
+
+        let sortHandle = [() => this.sortHandler(!ascending, 'none'), () => this.sortHandler(!ascending, 'title'),
+            () => this.sortHandler(!ascending, 'created')]
 
         let fishElements: any[] = [];
 
         let mainFish = this.state.mainFish;
 
-        let sendFish = {
-            colour: this.state.sendFishColour,
-            eye: this.state.sendFishEye,
-            parent: parseInt(this.state.fishID),
-            item: this.state.sendFishText,
-            title: this.state.sendFishTitle
-        }
-
-        console.log(sendFish)
         if(mainFish){
             
             for(let i = 0; i < fishes.length; i++){
@@ -179,7 +185,13 @@ class Pond extends React.Component<any, any> {
                         textHandler={this.textHandler.bind(this)}
                         titleHandler={this.titleHandler.bind(this)}
                         buttonHandler={this.release.bind(this)}/>
-
+                    
+                    
+                    <div className="form">
+                        <SortingTable attribute={attribute} ascending={ascending} 
+                            clickHandler={sortHandle} />
+                    </div>
+                    
 
                     {fishElements}
     
