@@ -37,3 +37,13 @@ code {
     border-color: black;
     border-style: solid;
 }
+
+.social {
+    position: fixed;
+    right: 2%;
+    top: 5%;
+}
+
+.social button{
+    display: block;
+}

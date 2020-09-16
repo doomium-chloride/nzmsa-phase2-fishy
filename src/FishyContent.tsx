@@ -1,6 +1,46 @@
 import React from 'react';
 import { Box, Button } from '@material-ui/core';
 import Fish from './Fish';
+import {
+    EmailIcon,
+    FacebookIcon,
+    FacebookMessengerIcon,
+    InstapaperIcon,
+    LineIcon,
+    LinkedinIcon,
+    LivejournalIcon,
+    MailruIcon,
+    OKIcon,
+    PinterestIcon,
+    PocketIcon,
+    RedditIcon,
+    TelegramIcon,
+    TumblrIcon,
+    TwitterIcon,
+    ViberIcon,
+    VKIcon,
+    WeiboIcon,
+    WhatsappIcon,
+    WorkplaceIcon,
+    EmailShareButton,
+    FacebookShareButton,
+    InstapaperShareButton,
+    LineShareButton,
+    LinkedinShareButton,
+    LivejournalShareButton,
+    MailruShareButton,
+    OKShareButton,
+    PinterestShareButton,
+    PocketShareButton,
+    RedditShareButton,
+    TelegramShareButton,
+    TumblrShareButton,
+    TwitterShareButton,
+    ViberShareButton,
+    VKShareButton,
+    WhatsappShareButton,
+    WorkplaceShareButton
+} from "react-share"
 
 function FishyContent(props: any){
 
@@ -15,6 +55,12 @@ function FishyContent(props: any){
             <h3>
                 {fish.title}
             </h3>
+
+            <div className="social">
+                <EmailShareButton children={<EmailIcon/>} url={window.location.href} />
+                <RedditShareButton children={<RedditIcon/>} url={window.location.href} />
+                <LineShareButton children={<LineIcon/>} url={window.location.href} />
+            </div>
 
             <p>
                 <small>
