@@ -17,10 +17,21 @@ function FishyContent(props: any){
             </h3>
 
             <p>
+                <small>
+                    {getDate(fish.created)}
+                </small>
+            </p>
+
+            <p>
                 {fish.item}
             </p>
         </Box>
     )
+}
+
+function getDate(str: string){
+    let split = str.split('T');
+    return split[0] + " " + split[1];
 }
 
 export default FishyContent;
