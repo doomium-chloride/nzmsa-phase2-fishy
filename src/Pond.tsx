@@ -23,6 +23,15 @@ interface FishObj {
     eye: string
 }
 
+const fishSvgPath = "./fishes/";
+const fishyList = ["fish1.svg", "fish2.svg", "fish3.svg", "fish4.svg"]
+
+function getRandom(array: string[]){
+    const len = array.length;
+    const i = Math.floor(Math.random() * len);
+    return array[i];
+}
+
 class Pond extends React.Component<any, any> {
     constructor(props: any){
         super(props);
@@ -51,6 +60,9 @@ class Pond extends React.Component<any, any> {
                     fishes: message
                 })
             })
+            .catch(() =>{
+                console.error("Fetch fishes failed");
+            })
         
         if(this.state.fishID != null){
             let fishID = this.state.fishID || 0
@@ -61,7 +73,9 @@ class Pond extends React.Component<any, any> {
                     mainFish: message
                 })
             })
-            .catch(() => null)// do nothing
+            .catch(() => {
+                console.error("Fetch main fish failed");
+            })
         }
 
         this.updatePredicate();
@@ -214,7 +228,7 @@ class Pond extends React.Component<any, any> {
         } else{
             fishes.forEach((fish: any, i: number) =>   fishElements.push(<Fish colour={fish.colour} 
                 eye={fish.eye} key={"fish" + i} dataTip={fish.title} onClick={fishyRedirect(fish.fishID)} />));
-            console.log(fishes)
+
             return(
                 <div>
                     <FishyForm colourHandler={this.colourHandler.bind(this)} 
