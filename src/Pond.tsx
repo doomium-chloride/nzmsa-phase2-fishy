@@ -46,7 +46,8 @@ class Pond extends React.Component<any, any> {
             sortBy: 'none',
             sortAscending: true,
             narrow: false,
-            searchItem: ""
+            searchItem: "",
+            limit: 0
         }
     }
     componentDidMount(){
@@ -157,6 +158,12 @@ class Pond extends React.Component<any, any> {
             searchItem: text
         })
     }
+
+    limitHandler(value: number){// show Top X
+        this.setState({
+            limit: value
+        })
+    }
     
     render(){
 //
@@ -170,6 +177,11 @@ class Pond extends React.Component<any, any> {
         }
 
         fishes = sort(fishes, attribute, ascending);
+
+        let limit = this.state.limit;
+        if(limit > 0){
+            fishes = fishes.slice(0, limit);
+        }
 
         let sortHandle = [() => this.sortHandler(!ascending, 'none'), () => this.sortHandler(!ascending, 'title'),
             () => this.sortHandler(!ascending, 'created')]
@@ -218,7 +230,9 @@ class Pond extends React.Component<any, any> {
                     <div className="form">
                         <SortingTable attribute={attribute} ascending={ascending} 
                             clickHandler={sortHandle} narrow={this.state.narrow} 
-                            searchHandler={this.searchHandler.bind(this)} />
+                            searchHandler={this.searchHandler.bind(this)} 
+                            limitHandler={this.limitHandler.bind(this)} 
+                            limit={limit} />
                     </div>
 
 
@@ -241,7 +255,9 @@ class Pond extends React.Component<any, any> {
                     <div className="form">
                         <SortingTable attribute={attribute} ascending={ascending} 
                             clickHandler={sortHandle} narrow={this.state.narrow} 
-                            searchHandler={this.searchHandler.bind(this)} />
+                            searchHandler={this.searchHandler.bind(this)} 
+                            limitHandler={this.limitHandler.bind(this)}
+                            limit={limit} />
                     </div>
                     
 

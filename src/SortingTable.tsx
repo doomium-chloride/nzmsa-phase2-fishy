@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableHead, TableRow, TableCell, TableSortLabel, Checkbox, TextField, Button } from '@material-ui/core';
+import { TableHead, TableRow, TableCell, TableSortLabel, Checkbox, TextField, Button, Select, MenuItem, InputLabel } from '@material-ui/core';
 
 function SortingTable(props: any){
     let attribute = props.attribute;
@@ -9,6 +9,8 @@ function SortingTable(props: any){
     let dateHandle = props.clickHandler[2];
     let searchHandler = props.searchHandler;
     let narrow: boolean = props.narrow;
+    let limitHandler = props.limitHandler
+    let limit = props.limit;
     if(narrow){
         return (
             <TableHead>
@@ -61,6 +63,24 @@ function SortingTable(props: any){
                         >
                             <TextField id="Search-fish" label="Search" variant="filled" fullWidth 
                                 onChange={(e) => searchHandler(e.target.value)} />
+                    </TableCell>
+                    <TableCell>
+                        <InputLabel>
+                            Show Top
+                        </InputLabel>
+                        <Select
+                            value={limit}
+                            onChange={(e) => limitHandler(e.target.value)}
+                            renderValue={(value: any) => valueRender(value)}
+                            >
+                            <MenuItem value={0}>All</MenuItem>
+                            <MenuItem value={10}>Top 10</MenuItem>
+                            <MenuItem value={20}>Top 20</MenuItem>
+                            <MenuItem value={30}>Top 30</MenuItem>
+                            <MenuItem value={40}>Top 40</MenuItem>
+                            <MenuItem value={50}>Top 50</MenuItem>
+                            <MenuItem value={100}>Top 100</MenuItem>
+                        </Select>
                     </TableCell>
                 </TableRow>
             </TableHead>
@@ -116,9 +136,35 @@ function SortingTable(props: any){
                         <TextField id="Search-fish" label="Search" variant="filled" fullWidth 
                             onChange={(e) => searchHandler(e.target.value)} />
                 </TableCell>
+                <TableCell>
+                        <InputLabel>
+                            Show Top
+                        </InputLabel>
+                        <Select
+                            value={limit}
+                            onChange={(e) => limitHandler(e.target.value)}
+                            renderValue={(value: any) => valueRender(value)}
+                            >
+                            <MenuItem value={0}>All</MenuItem>
+                            <MenuItem value={10}>Top 10</MenuItem>
+                            <MenuItem value={20}>Top 20</MenuItem>
+                            <MenuItem value={30}>Top 30</MenuItem>
+                            <MenuItem value={40}>Top 40</MenuItem>
+                            <MenuItem value={50}>Top 50</MenuItem>
+                            <MenuItem value={100}>Top 100</MenuItem>
+                        </Select>
+                    </TableCell>
             </TableRow>
         </TableHead>
     )
+}
+
+function valueRender(value: number){
+    if(value == 0){
+        return "All";
+    } else {
+        return `Top ${value}`;
+    }
 }
 
 export default SortingTable;
