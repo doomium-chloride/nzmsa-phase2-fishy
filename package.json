@@ -12,8 +12,8 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.20.0",
+    "fuzzy-search": "^3.2.1",
     "material-ui-color-picker": "^3.5.1",
-    "material-ui-rc-color-picker": "^1.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/fuzzy-search": "^2.1.0",
     "@types/react-router-dom": "^5.1.5"
   }
 }

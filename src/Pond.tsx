@@ -8,6 +8,7 @@ import { IconButton, Icon, SvgIcon } from '@material-ui/core';
 import up from './up.svg';
 import SortingTable from './SortingTable';
 import {sort} from './Sorter';
+import FuzzySearch from 'fuzzy-search';
 
 // url = localhost:44311/
 let count = 0
@@ -34,7 +35,9 @@ class Pond extends React.Component<any, any> {
             sendFishTitle: "",
             sendFishText: "", //item
             sortBy: 'none',
-            sortAscending: true
+            sortAscending: true,
+            narrow: false,
+            searchItem: ""
         }
     }
     componentDidMount(){
@@ -60,6 +63,9 @@ class Pond extends React.Component<any, any> {
             })
             .catch(() => null)// do nothing
         }
+
+        this.updatePredicate();
+        window.addEventListener("resize", this.updatePredicate.bind(this));
     }
 
     release(){
@@ -123,12 +129,33 @@ class Pond extends React.Component<any, any> {
             sortAscending: ascending
         });
     }
+
+    updatePredicate() {
+        this.setState({ narrow: window.innerWidth < 1000 });
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updatePredicate.bind(this));
+    }
+
+    searchHandler(text: string) {
+        this.setState({
+            searchItem: text
+        })
+    }
     
     render(){
 //
         let attribute = this.state.sortBy;
         let ascending = this.state.sortAscending;
-        let fishes = sort(this.state.fishes, attribute, ascending);
+        let fishes = this.state.fishes;
+
+        let searcher = new FuzzySearch(fishes, ['title', 'item']);
+        if(this.state.searchItem != ""){
+            fishes = searcher.search(this.state.searchItem);
+        }
+
+        fishes = sort(fishes, attribute, ascending);
 
         let sortHandle = [() => this.sortHandler(!ascending, 'none'), () => this.sortHandler(!ascending, 'title'),
             () => this.sortHandler(!ascending, 'created')]
@@ -146,6 +173,7 @@ class Pond extends React.Component<any, any> {
                     dataTip={fish.title} onClick={fishyRedirect(fish.fishID)} />);
                 }
             }
+
 
             return(
                 <div>
@@ -172,12 +200,21 @@ class Pond extends React.Component<any, any> {
                         titleHandler={this.titleHandler.bind(this)}
                         buttonHandler={this.release.bind(this)}/>
 
+                    
+                    <div className="form">
+                        <SortingTable attribute={attribute} ascending={ascending} 
+                            clickHandler={sortHandle} narrow={this.state.narrow} 
+                            searchHandler={this.searchHandler.bind(this)} />
+                    </div>
+
+
                     {fishElements}
                 </div>
             )
         } else{
             fishes.forEach((fish: any, i: number) =>   fishElements.push(<Fish colour={fish.colour} 
                 eye={fish.eye} key={"fish" + i} dataTip={fish.title} onClick={fishyRedirect(fish.fishID)} />));
+            console.log(fishes)
             return(
                 <div>
                     <FishyForm colourHandler={this.colourHandler.bind(this)} 
@@ -189,7 +226,8 @@ class Pond extends React.Component<any, any> {
                     
                     <div className="form">
                         <SortingTable attribute={attribute} ascending={ascending} 
-                            clickHandler={sortHandle} />
+                            clickHandler={sortHandle} narrow={this.state.narrow} 
+                            searchHandler={this.searchHandler.bind(this)} />
                     </div>
                     
 

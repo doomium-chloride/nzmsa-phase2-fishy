@@ -1,1 +1,1 @@
-declare module "material-ui-rc-color-picker";
+declare module "fuzzy-search";
