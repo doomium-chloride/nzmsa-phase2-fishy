@@ -10,8 +10,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+    console.log(window.location.href);
   return (
-
+    
     <Router>
             <div className="App">
 
