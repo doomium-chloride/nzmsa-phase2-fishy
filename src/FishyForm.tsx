@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import ColorPicker from 'material-ui-color-picker'
 import { TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
-import { kill } from 'process';
 
 function FishyForm(props: any){
 

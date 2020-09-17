@@ -10,8 +10,8 @@ import {
     RedditShareButton
 } from "react-share"
 import Axios from 'axios';
+import { urlBase } from './Globals';
 
-const urlBase = "https://localhost:44311/api/Fish/";
 
 function FishyContent(props: any){
 

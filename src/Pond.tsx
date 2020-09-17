@@ -9,11 +9,10 @@ import up from './up.svg';
 import SortingTable from './SortingTable';
 import {sort} from './Sorter';
 import FuzzySearch from 'fuzzy-search';
+import { serverBase, fetchFish } from './Globals';
 
 // url = localhost:44311/
 let count = 0
-const serverBase = "https://localhost:44311/";
-const fetchFish = "api/Fish";
 
 interface FishObj {
     fishID: number,
