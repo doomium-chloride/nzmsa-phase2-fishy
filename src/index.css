@@ -47,3 +47,9 @@ code {
 .social button{
     display: block;
 }
+
+.delete {
+    position: fixed;
+    right: 20%;
+    top: 5%;
+}

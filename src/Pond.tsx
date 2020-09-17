@@ -47,7 +47,8 @@ class Pond extends React.Component<any, any> {
             sortAscending: true,
             narrow: false,
             searchItem: "",
-            limit: 0
+            limit: 0,
+            spell: ""
         }
     }
     componentDidMount(){
@@ -75,7 +76,7 @@ class Pond extends React.Component<any, any> {
                 })
             })
             .catch(() => {
-                console.error("Fetch main fish failed");
+                console.log("Fetch main fish failed. Maybe there's no main fish.");
             })
         }
 
@@ -91,12 +92,16 @@ class Pond extends React.Component<any, any> {
             parent: parseInt(this.state.fishID) || 0,
             item: this.state.sendFishText,
             title: this.state.sendFishTitle,
-            created: new Date()
+            created: new Date(),
+            del: this.state.spell
         }
 
         axios.post(serverBase + fetchFish, sendFish)
             .then(() => {
                 window.location.reload();
+            })
+            .catch(() => {
+                console.error("Something wrong with the release")
             });
 
             
@@ -164,6 +169,12 @@ class Pond extends React.Component<any, any> {
             limit: value
         })
     }
+
+    spellHandler(spell: string){
+        this.setState({
+            spell: spell
+        })
+    }
     
     render(){
 //
@@ -224,7 +235,8 @@ class Pond extends React.Component<any, any> {
                         eyeHandler={this.eyeHandler.bind(this)} 
                         textHandler={this.textHandler.bind(this)}
                         titleHandler={this.titleHandler.bind(this)}
-                        buttonHandler={this.release.bind(this)}/>
+                        buttonHandler={this.release.bind(this)}
+                        spellHandler={this.spellHandler.bind(this)} />
 
                     
                     <div className="form">
@@ -249,7 +261,8 @@ class Pond extends React.Component<any, any> {
                         eyeHandler={this.eyeHandler.bind(this)} 
                         textHandler={this.textHandler.bind(this)}
                         titleHandler={this.titleHandler.bind(this)}
-                        buttonHandler={this.release.bind(this)}/>
+                        buttonHandler={this.release.bind(this)}
+                        spellHandler={this.spellHandler.bind(this)} />
                     
                     
                     <div className="form">
