@@ -9,7 +9,7 @@ import up from './up.svg';
 import SortingTable from './SortingTable';
 import {sort} from './Sorter';
 import FuzzySearch from 'fuzzy-search';
-import { serverBase, fetchFish } from './Globals';
+import { serverBase, fetchFish, urlBase } from './Globals';
 
 // url = localhost:44311/
 let count = 0
@@ -54,7 +54,7 @@ class Pond extends React.Component<any, any> {
 
         let that = this;
 
-        axios.get(serverBase + fetchFish)
+        axios.get(urlBase)
             .then(function (response) {
                 let message = response.data;
                 that.setState({
@@ -67,7 +67,7 @@ class Pond extends React.Component<any, any> {
         
         if(this.state.fishID != null){
             let fishID = this.state.fishID || 0
-            axios.get(serverBase + fetchFish + "/" + fishID)
+            axios.get(urlBase + fishID)
             .then(function (response) {
                 let message = response.data;
                 that.setState({
