@@ -46,7 +46,7 @@ function FishyContent(props: any){
                 </Button>
             </div>
 
-            <h3>
+            <h3 role="heading">
                 {fish.title}
             </h3>
 
@@ -56,13 +56,13 @@ function FishyContent(props: any){
                 <LineShareButton children={<LineIcon/>} url={window.location.href} />
             </div>
 
-            <p>
+            <p role="date">
                 <small>
                     {getDate(fish.created)}
                 </small>
             </p>
 
-            <p>
+            <p role="content">
                 {fish.item}
             </p>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

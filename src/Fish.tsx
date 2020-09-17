@@ -20,7 +20,7 @@ function Fish(props: any)
 
     return(
         <div className="fish" data-tip={tip} data-for={baseStr + id}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" onClick={onclick}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" onClick={onclick} role="img">
     
                 <circle cx="100" cy="200" r="100" fill={colour} data-tip />
                 
