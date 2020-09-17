@@ -19,8 +19,7 @@ function App() {
                     <Route exact path="/">
                         <Pond />
                     </Route>
-                        <Route path="/:fishID" component={child}>
-                    </Route>
+                    <Route path="/:fishID" component={child} />
                 </Switch>
             </div>
     </Router>

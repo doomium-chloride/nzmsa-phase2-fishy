@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableHead, TableRow, TableCell, TableSortLabel, Checkbox, TextField, Button, Select, MenuItem, InputLabel } from '@material-ui/core';
+import { TableHead, TableRow, TableCell, TableSortLabel, Checkbox, TextField, Button, Select, MenuItem, InputLabel, Table } from '@material-ui/core';
 
 function SortingTable(props: any){
     let attribute = props.attribute;
@@ -13,6 +13,7 @@ function SortingTable(props: any){
     let limit = props.limit;
     if(narrow){
         return (
+            <Table>
             <TableHead>
                 <TableRow>
                     <TableCell>
@@ -84,9 +85,11 @@ function SortingTable(props: any){
                     </TableCell>
                 </TableRow>
             </TableHead>
+            </Table>
         )
     }
     return (
+        <Table>
         <TableHead>
             <TableRow>
                 <TableCell>
@@ -156,6 +159,7 @@ function SortingTable(props: any){
                     </TableCell>
             </TableRow>
         </TableHead>
+        </Table>
     )
 }
 
