@@ -9,6 +9,16 @@ import Pond from './Pond';
 import logo from './logo.svg';
 import './App.css';
 
+var express = require('express');
+var serveStatic = require('serve-static');
+var fallback = require('express-history-api-fallback');
+
+var app = express();
+
+app.get('*', function (req: any, res: any) {
+    res.send('public/index.html')
+})
+
 function App() {
     console.log(process.env.PUBLIC_URL);
   return (
