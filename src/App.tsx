@@ -10,7 +10,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-    console.log(window.location.href);
+    console.log(process.env.PUBLIC_URL);
   return (
     
     <Router basename={process.env.PUBLIC_URL}>
