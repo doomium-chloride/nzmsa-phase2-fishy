@@ -19,6 +19,9 @@ function App() {
                     <Route exact path="/">
                         <Pond />
                     </Route>
+                    <Route path="/meh">
+                        <h1>Hello!!!</h1>
+                    </Route>
                     <Route path="/:fishID" component={child} />
                 </Switch>
             </div>
