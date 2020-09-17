@@ -13,7 +13,7 @@ function App() {
     console.log(window.location.href);
   return (
     
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
             <div className="App">
 
                 <Switch>
