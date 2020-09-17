@@ -29,8 +29,8 @@ function App() {
 
 const child = ({ match }: any) => (
 
-    <Pond fishID={match.params.fishID}/>
-
+    //<Pond fishID={match.params.fishID}/>
+    <h1>match.params.fishID</h1>
 )
 
 export default App;
